@@ -86,7 +86,10 @@ public class MainPage extends JFrame {
 			
 			@Override
 		    public void insertUpdate(DocumentEvent e) {
+				viewPanel.removeAll();
+				revalidate();
 		    	changedSearch();
+		    	
 		    
 		    }
 			
@@ -109,15 +112,12 @@ public class MainPage extends JFrame {
 			    		
 						for (p=0;p<stringcontents.length-1;p+=3) {		
 							
-
-					    	if(Pattern.matches(username+".*", stringcontents[p]) && username.length()>1) {	
-					    					
-					    			viewPanel.add(new JLabel(stringcontents[p]));
-					    		
-					    		revalidate();
-					    		
-
-					    		
+							JLabel lblitem = new JLabel();
+					    	if(Pattern.matches(username+".*", stringcontents[p])) {		
+					    			repaint();
+					    			lblitem.setText(stringcontents[p]);
+					    			viewPanel.add(lblitem);					    		
+					    			revalidate();			    						    		
 					    		
 					    	}
 						}
@@ -138,11 +138,13 @@ public class MainPage extends JFrame {
 
 			@Override
 		    public void removeUpdate(DocumentEvent e) {
+				viewPanel.removeAll();
+				revalidate();
 		    	changedSearch();
 		    }
 
 		    @Override
-		    public void changedUpdate(DocumentEvent e) {		    	
+		    public void changedUpdate(DocumentEvent e) {
 		    }
 		});
 		
