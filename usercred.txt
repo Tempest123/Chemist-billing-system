@@ -1,0 +1,7 @@
+Aditya|123|abc@gmail.com
+Bharath|1234|bbc@gmail.com
+Chandan|12345|cbc@gmail.com
+Barry|b|b@b.com
+Charry|b|b@b.com
+Darry|b|b@b.com
+Larry|l|l@l.com
