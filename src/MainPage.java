@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -24,6 +25,10 @@ import java.util.regex.Pattern;
 import java.awt.event.InputMethodEvent;
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class MainPage extends JFrame {
 
@@ -63,6 +68,7 @@ public class MainPage extends JFrame {
 		panel.setBackground(SystemColor.controlDkShadow);
 		panel.setBounds(0, 0, 305, 561);
 		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		File fuser = new File("usercred.txt");
 			
@@ -71,10 +77,11 @@ public class MainPage extends JFrame {
 		
 		JPanel viewPanel = new JPanel();
     	JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(394, 86, 450, 464);
+		scrollPane.setBounds(394, 91, 450, 459);
 		scrollPane.setViewportView(viewPanel);
 		contentPane.add(scrollPane);
 		viewPanel.setBackground(SystemColor.activeCaption);
+		viewPanel.setLayout(null);
 		
 		
 		String arr[]=new String[100]; 
@@ -86,8 +93,6 @@ public class MainPage extends JFrame {
 			
 			@Override
 		    public void insertUpdate(DocumentEvent e) {
-				viewPanel.removeAll();
-				revalidate();
 		    	changedSearch();
 		    	
 		    
@@ -97,7 +102,6 @@ public class MainPage extends JFrame {
 		    public void changedSearch() {
 		    			    	
 		    	String username = txtSearch.getText().toString();
-				System.out.print(username + "Hi");
 				boolean flag = false;
 				try {
 					FileReader fr = new FileReader(fuser);
@@ -105,24 +109,26 @@ public class MainPage extends JFrame {
 					String line = br.readLine();
 					int p=0;
 					String[] stringcontents= {};
+					
+					viewPanel.removeAll();
 					while (line != null) {
-						stringcontents = line.split("\\|");
-						//Successful Login
-			    		
-			    		
-						for (p=0;p<stringcontents.length-1;p+=3) {		
-							
+						
+						stringcontents = line.split("\\|");		    		
+						
 							JLabel lblitem = new JLabel();
-					    	if(Pattern.matches(username+".*", stringcontents[p])) {		
+					    	if(Pattern.matches(username+".*", stringcontents[0])) {
+					    			revalidate();	
 					    			repaint();
-					    			lblitem.setText(stringcontents[p]);
-					    			viewPanel.add(lblitem);					    		
-					    			revalidate();			    						    		
-					    		
+					    			lblitem.setText(stringcontents[0]);
+					    			lblitem.setBounds(new Rectangle(0, p*25, 300, 25));
+					    			lblitem.setFont(new Font("Tahoma", Font.PLAIN, 18));
+					    			viewPanel.add(lblitem);		
+					    			revalidate();	
+					    			repaint();		
+					    			p++;
 					    	}
-						}
-
-						line = br.readLine();				
+						line = br.readLine();	
+						
 					}							
 						
 					br.close();
@@ -138,8 +144,6 @@ public class MainPage extends JFrame {
 
 			@Override
 		    public void removeUpdate(DocumentEvent e) {
-				viewPanel.removeAll();
-				revalidate();
 		    	changedSearch();
 		    }
 
