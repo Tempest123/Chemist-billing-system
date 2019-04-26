@@ -69,6 +69,9 @@ public class LoginForm extends JFrame {
 					if(stringcontents[p].equals(username) && stringcontents[p+1].equals(password)) {
 						JOptionPane.showMessageDialog(this, "Login Successful");
 						flag = true;
+						MainPage mp = new MainPage();
+						mp.setVisible(true);
+						this.dispose();
 						break;
 					}					
 				}
