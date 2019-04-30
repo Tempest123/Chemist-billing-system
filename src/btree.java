@@ -195,19 +195,6 @@ public class btree
 				f++;
 			}
 		}
-		//Write contents to file XD
-		File findex = new File("index.txt");
-		try {
-			FileWriter fw = new FileWriter(findex);
-			BufferedWriter bw = new BufferedWriter(fw);
-			for(int j=0;j<queue.length;j++) {
-				String str = queue[j]+System.lineSeparator();
-			    bw.write(str);
-			}			
-			bw.close();
-			fw.close();
-		} catch (Exception e) {
-			System.out.println("Failed to write to file");
-		}
+		
 	}
 	};

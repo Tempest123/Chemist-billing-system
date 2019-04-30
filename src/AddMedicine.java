@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,12 +8,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddMedicine extends JFrame {
 
@@ -20,7 +27,7 @@ public class AddMedicine extends JFrame {
 	private JTextField tfId;
 	private JTextField tfMedName;
 	private JTextField tfQuantity;
-	private JTextField tfExipryDate;
+	private JTextField tfExpiryDate;
 	private JTextField tfManufacturingCompany;
 
 	/**
@@ -89,11 +96,11 @@ public class AddMedicine extends JFrame {
 		lblExpiryDate.setBounds(44, 270, 101, 28);
 		contentPane.add(lblExpiryDate);
 		
-		tfExipryDate = new JTextField();
-		tfExipryDate.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfExipryDate.setColumns(10);
-		tfExipryDate.setBounds(214, 271, 158, 28);
-		contentPane.add(tfExipryDate);
+		tfExpiryDate = new JTextField();
+		tfExpiryDate.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfExpiryDate.setColumns(10);
+		tfExpiryDate.setBounds(214, 271, 158, 28);
+		contentPane.add(tfExpiryDate);
 		
 		JLabel lblManufacturingCompany = new JLabel("Manufacturing Company");
 		lblManufacturingCompany.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -112,11 +119,66 @@ public class AddMedicine extends JFrame {
 		lblNewLabel.setBounds(44, 25, 312, 36);
 		contentPane.add(lblNewLabel);
 		
+		JFrame jframe = this;
+		
 		JButton btnAddRecord = new JButton("Add record");
 		btnAddRecord.addMouseListener(new MouseAdapter() {
+			int id,qty;
+			String name,expdate,manucomp;
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				boolean proceed = true;
 				
+				name = tfMedName.getText().toString();
+				expdate = tfExpiryDate.getText().toString();
+				manucomp = tfManufacturingCompany.getText().toString();
+				
+				try {
+					id = Integer.parseInt(tfId.getText().toString());				
+					
+				}
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "ID must be an integer number!");
+					proceed = false;
+				}
+				
+				try {
+					qty = Integer.parseInt(tfQuantity.getText().toString());
+					
+				}
+				catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Quantity must be an integer number!");
+					proceed = false;
+				}
+				
+				Date date;
+				try {
+					date = new SimpleDateFormat("dd/mm/yyyy").parse(expdate);
+				} catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Date should be in the format dd/mm/yyyy");
+					proceed = false;
+				}
+				
+				if(manucomp.isEmpty() || name.isEmpty())
+					proceed = false;
+				
+				if(proceed) {
+					String str = id+"|"+name+"|"+qty+"|"+expdate+"|"+manucomp+System.lineSeparator();
+					File fmedicines = new File("medicines.txt");
+//					try {
+//						FileWriter fw = new FileWriter(fmedicines, true);
+//						BufferedWriter bw = new BufferedWriter(fw);
+//						bw.write(str);
+//						JOptionPane.showMessageDialog(null, "Medicine details added!");
+//						jframe.dispose();
+//						bw.close();
+//						fw.close();
+//					} catch (Exception e) {
+//						System.out.println("Failed to write to file");
+//					}
+					
+					
+				}								
 			}
 		});
 		btnAddRecord.setBackground(new Color(255, 0, 0));

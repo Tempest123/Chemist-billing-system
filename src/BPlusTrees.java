@@ -1,18 +1,13 @@
-import java.util.Scanner;
-
 public class BPlusTrees {
-
-	public void insert(String str) {
-		btree  b = new btree();	
-		String key;
+	
+	btree  b = new btree();	
+	
+	public void insert(String str,int key) {
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter the integer to be inserted: ");
-		int k = sc.nextInt();
-		key = String.valueOf(k);
-		key=key+str;
-		b.insert(k);
-		b.display();					
+		String item;
+		
+		b.insert(key);
+		b.display();
 		
 //				case 2:	System.out.println("Enter the integer to be found: ");
 //					key = sc.nextInt();
@@ -28,5 +23,11 @@ public class BPlusTrees {
 //			
 //		}
 		
+	}
+	
+	public static void main(String args[]) {
+		BPlusTrees obj = new BPlusTrees();
+		for(int i = 0;i<10;i++)
+			obj.insert("sample", i);
 	}
 }
