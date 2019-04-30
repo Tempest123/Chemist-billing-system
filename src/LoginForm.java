@@ -65,7 +65,7 @@ public class LoginForm extends JFrame {
 			while (line != null) {
 				stringcontents = line.split("\\|");
 				//Successful Login
-				for (p=0;p<stringcontents.length-1;p+=3) {
+				//for (p=0;p<stringcontents.length-1;p+=3) {
 					if(stringcontents[p].equals(username) && stringcontents[p+1].equals(password)) {
 						JOptionPane.showMessageDialog(this, "Login Successful");
 						flag = true;
@@ -74,7 +74,7 @@ public class LoginForm extends JFrame {
 						this.dispose();
 						break;
 					}					
-				}
+				//}
 
 				line = br.readLine();				
 			}			

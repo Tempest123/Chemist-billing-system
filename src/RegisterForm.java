@@ -187,7 +187,6 @@ public class RegisterForm extends JFrame {
 					if(!flag) {
 						JOptionPane.showMessageDialog(null, "Registration Completed!");
 						String str = username+"|"+password+"|"+email+System.lineSeparator();
-						
 						try {
 							FileWriter fw = new FileWriter(fuser, true);
 							BufferedWriter bw = new BufferedWriter(fw);

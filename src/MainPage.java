@@ -1,4 +1,7 @@
 import java.awt.BorderLayout;
+import java.awt.ComponentOrientation;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -26,9 +29,18 @@ import java.awt.event.InputMethodEvent;
 import java.awt.FlowLayout;
 import javax.swing.JScrollPane;
 import java.awt.GridLayout;
+
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainPage extends JFrame {
 
@@ -70,6 +82,27 @@ public class MainPage extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
+		JLabel lblClickHereTo = new JLabel(new ImageIcon("src/ApplicationImages/greencross.png"));
+		lblClickHereTo.setForeground(new Color(0, 0, 0));
+		lblClickHereTo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				AddMedicine obj = new AddMedicine();
+				obj.setVisible(true);
+				obj.setDefaultCloseOperation(DISPOSE_ON_CLOSE);	
+			}
+		});
+		
+		JLabel lblNewLabel = new JLabel("Click To Add Medicine");
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setBounds(61, 163, 201, 36);
+		panel.add(lblNewLabel);
+		lblClickHereTo.setText("CLICK HERE TO ADD MEDICINE");
+		lblClickHereTo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblClickHereTo.setBounds(21, 11, 261, 188);
+		panel.add(lblClickHereTo);
+		
 		File fuser = new File("usercred.txt");
 			
 		txtSearch = new JTextField();
@@ -77,24 +110,22 @@ public class MainPage extends JFrame {
 		
 		JPanel viewPanel = new JPanel();
     	JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(394, 91, 450, 459);
+		scrollPane.setBounds(394, 89, 464, 461);
 		scrollPane.setViewportView(viewPanel);
 		contentPane.add(scrollPane);
 		viewPanel.setBackground(SystemColor.activeCaption);
-		viewPanel.setLayout(null);
-		
+		viewPanel.setLayout(new BoxLayout(viewPanel, BoxLayout.Y_AXIS));
+		viewPanel.setAlignmentX(LEFT_ALIGNMENT);
 		
 		String arr[]=new String[100]; 
 		
 			
 		
 		txtSearch.getDocument().addDocumentListener(new DocumentListener() {
-			
-			
+						
 			@Override
 		    public void insertUpdate(DocumentEvent e) {
-		    	changedSearch();
-		    	
+		    	changedSearch();		    	
 		    
 		    }
 			
@@ -114,19 +145,32 @@ public class MainPage extends JFrame {
 					while (line != null) {
 						
 						stringcontents = line.split("\\|");		    		
-						
-							JLabel lblitem = new JLabel();
+						JPanel viewPanel2 = new JPanel();
+						viewPanel2.setAlignmentX(LEFT_ALIGNMENT);
+						viewPanel2.setAlignmentY(LEFT_ALIGNMENT);
 					    	if(Pattern.matches(username+".*", stringcontents[0])) {
+					    			JLabel lblitem = new JLabel();
 					    			revalidate();	
 					    			repaint();
 					    			lblitem.setText(stringcontents[0]);
-					    			lblitem.setBounds(new Rectangle(0, p*25, 300, 25));
-					    			lblitem.setFont(new Font("Tahoma", Font.PLAIN, 18));
-					    			viewPanel.add(lblitem);		
+					    			lblitem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+					    			lblitem.setHorizontalAlignment(SwingConstants.LEFT);;
+					    			viewPanel2.add(lblitem);	
+					    			viewPanel2.add(Box.createRigidArea(new Dimension(200,0)));
+					    			JButton item2 = new JButton("-");
+					    			item2.setPreferredSize(new Dimension(25,25));
+					    			viewPanel2.add(item2);		
+					    			JTextField item3 = new JTextField("1");
+					    			viewPanel2.add(item3);
+					    			JButton item4 = new JButton("+");
+					    			item4.setPreferredSize(new Dimension(25,25));
+					    			viewPanel2.add(item4);					    			
+					    			viewPanel.add(viewPanel2);
 					    			revalidate();	
-					    			repaint();		
+					    			repaint();
 					    			p++;
 					    	}
+					    	
 						line = br.readLine();	
 						
 					}							
