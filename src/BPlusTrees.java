@@ -38,7 +38,6 @@ public class BPlusTrees {
 	}
 
 	public void insert(String str, int key) {
-
 		try {
 			FileWriter fw = new FileWriter(fmedicine, true);
 			BufferedWriter bw = new BufferedWriter(fw);
@@ -54,6 +53,13 @@ public class BPlusTrees {
 	
 	public void show() {
 		b.display();
+	}
+	
+	public boolean found(int key) {
+		if(b.search(key))
+			return true;
+		else
+			return false;
 	}
 
 	public void search(int key) {

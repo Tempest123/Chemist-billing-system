@@ -168,8 +168,12 @@ public class AddMedicine extends JFrame {
 				if(proceed) {
 					String str = id+"|"+name+"|"+qty+"|"+expdate+"|"+manucomp+System.lineSeparator();
 					BPlusTrees obj = new BPlusTrees();
-					obj.insert(str, id);
-					JOptionPane.showMessageDialog(null, "Insertion Completed!");		
+					if(!obj.found(id)) {
+						obj.insert(str, id);
+						JOptionPane.showMessageDialog(null, "Insertion Completed!");						
+					}
+					else		
+						JOptionPane.showMessageDialog(null, "Duplicate Record! Not inserted!");
 				}								
 			}
 		});
