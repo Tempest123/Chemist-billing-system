@@ -11,6 +11,7 @@ public class btree {
 	Node root;
 	Node found;
 	int fkey;
+	public String allrecords="";
 
 	btree() {
 		root = create_newnode();
@@ -224,6 +225,8 @@ public class btree {
 							System.out.print(queue[f].ele[i] + ":");
 								String[] line = queue[f].details[i].split(System.lineSeparator());
 							System.out.print(line[line.length-1]);
+							allrecords = allrecords + queue[f].ele[i] + "|" + line[line.length-1] + System.lineSeparator();
+							System.out.println(allrecords);
 							System.out.print("\t");
 							
 

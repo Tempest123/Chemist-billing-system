@@ -174,6 +174,7 @@ public class AddMedicine extends JFrame {
 					}
 					else		
 						JOptionPane.showMessageDialog(null, "Duplicate Record! Not inserted!");
+					
 				}								
 			}
 		});

@@ -103,6 +103,20 @@ public class MainPage extends JFrame {
 		lblClickHereTo.setBounds(21, 11, 261, 188);
 		panel.add(lblClickHereTo);
 		
+		JButton btnsearchusingid = new JButton("Check Inventory");
+		btnsearchusingid.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Inventory inv = new Inventory();
+				inv.setVisible(true);
+			}
+		});
+		btnsearchusingid.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnsearchusingid.setForeground(new Color(143, 188, 143));
+		btnsearchusingid.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnsearchusingid.setBackground(Color.DARK_GRAY);
+		btnsearchusingid.setBounds(21, 231, 261, 36);
+		panel.add(btnsearchusingid);
+		
 		File fmedicines = new File("medicines.txt");
 			
 		txtSearch = new JTextField();

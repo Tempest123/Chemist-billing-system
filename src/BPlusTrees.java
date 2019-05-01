@@ -10,6 +10,8 @@ public class BPlusTrees {
 	boolean read = false;
 	String item;
 	File fmedicine = new File("medicines.txt");
+	String allrecords="";
+	String[] records= {};
 
 	BPlusTrees() {
 		if (!read) {
@@ -53,6 +55,8 @@ public class BPlusTrees {
 	
 	public void show() {
 		b.display();
+		this.allrecords = new String(b.allrecords);
+		records = allrecords.split(System.lineSeparator());
 	}
 	
 	public boolean found(int key) {
@@ -67,6 +71,7 @@ public class BPlusTrees {
 		flag = b.search(key);
 		if (!flag)
 			System.out.println("Element not found");
+		b.display();
 
 	}
 
