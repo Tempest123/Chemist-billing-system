@@ -41,6 +41,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Component;
+import javax.swing.ScrollPaneConstants;
 
 public class MainPage extends JFrame {
 
@@ -124,14 +126,14 @@ public class MainPage extends JFrame {
 
 		JPanel viewPanel = new JPanel();
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(394, 89, 464, 461);
 		scrollPane.setViewportView(viewPanel);
 		contentPane.add(scrollPane);
 		viewPanel.setBackground(SystemColor.activeCaption);
-		viewPanel.setLayout(new BoxLayout(viewPanel, BoxLayout.Y_AXIS));
-		viewPanel.setAlignmentX(LEFT_ALIGNMENT);
-
-		String arr[] = new String[100];
+		viewPanel.setLayout(new GridLayout(10,0));
+		
+		
 
 		txtSearch.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -146,44 +148,84 @@ public class MainPage extends JFrame {
 				String username = txtSearch.getText().toString();
 				boolean flag = false;
 				try {
+					int len=0;
+					FileReader freader = new FileReader(fmedicines);
+					BufferedReader breader = new BufferedReader(freader);
+					String linereader = breader.readLine();
+					while(breader.readLine()!=null)
+						len++;
+					len++;
+
+					breader.close();
+					freader.close();
+					int[] qty = new int[len];
+					System.out.println("Length="+len);
+				} catch(Exception e) {
+					System.out.println("Couldn't calculate length");
+				}
+				try {
 					FileReader fr = new FileReader(fmedicines);
 					BufferedReader br = new BufferedReader(fr);
 					String line = br.readLine();
 					int p = 0;
 					String[] stringcontents = {};
-
 					viewPanel.removeAll();
 					while (line != null) {
 
 						stringcontents = line.split("\\|");
 						JPanel viewPanel2 = new JPanel();
-						viewPanel2.setAlignmentX(LEFT_ALIGNMENT);
-						viewPanel2.setAlignmentY(LEFT_ALIGNMENT);
-						if (Pattern.matches(username + ".*", stringcontents[0])) {
+						if (Pattern.matches(username + ".*", stringcontents[1])) {
 							JLabel lblitem = new JLabel();
-							revalidate();
-							repaint();
-							lblitem.setText(stringcontents[0]);
-							lblitem.setFont(new Font("Tahoma", Font.PLAIN, 14));
+							
+							lblitem.setOpaque(true);
+							//lblitem.setBackground(Color.DARK_GRAY);
+							lblitem.setForeground(Color.BLACK);
 							lblitem.setHorizontalAlignment(SwingConstants.LEFT);
-							;
+							lblitem.setFont(new Font("Tahoma", Font.PLAIN, 16));
+							lblitem.setText(stringcontents[1]);//modified							
+							JLabel lblitem11 = new JLabel();
+							lblitem11.setOpaque(true);
+							//lblitem11.setBackground(Color.DARK_GRAY);
+							lblitem11.setForeground(Color.BLACK);
+							lblitem11.setHorizontalAlignment(SwingConstants.LEFT);
+							lblitem11.setFont(new Font("Tahoma", Font.PLAIN, 16));
+							lblitem11.setText(stringcontents[3]);//modified
+							JLabel lblitem12 = new JLabel();
+							lblitem12.setOpaque(true);
+							//lblitem12.setBackground(Color.DARK_GRAY);
+							lblitem12.setForeground(Color.BLACK);
+							lblitem12.setHorizontalAlignment(SwingConstants.LEFT);
+							lblitem12.setFont(new Font("Tahoma", Font.PLAIN, 16));
+							lblitem12.setText(stringcontents[2]);//modified						
 							viewPanel2.add(lblitem);
-							viewPanel2.add(Box.createRigidArea(new Dimension(200, 0)));
+							viewPanel2.add(Box.createRigidArea(new Dimension(150-(stringcontents[1].length()*9), 10)));
+							viewPanel2.add(lblitem11);
+							viewPanel2.add(Box.createRigidArea(new Dimension(20, 0)));
+							viewPanel2.add(lblitem12);
+							viewPanel2.add(Box.createRigidArea(new Dimension(20, 0)));
+							
 							JButton item2 = new JButton("-");
-							item2.setPreferredSize(new Dimension(25, 25));
+							item2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+							//item2.setPreferredSize(new Dimension(25, 25));
 							viewPanel2.add(item2);
-							JTextField item3 = new JTextField("1");
+							viewPanel2.add(Box.createRigidArea(new Dimension(10, 0)));
+							JTextField item3 = new JTextField(stringcontents[2]);
 							viewPanel2.add(item3);
 							JButton item4 = new JButton("+");
-							item4.setPreferredSize(new Dimension(25, 25));
+							item4.setFont(new Font("Tahoma", Font.PLAIN, 12));
+							//item4.setPreferredSize(new Dimension(25, 25));
+							viewPanel2.add(Box.createRigidArea(new Dimension(10, 0)));
 							viewPanel2.add(item4);
+
+							revalidate();
+							repaint();	
 							viewPanel.add(viewPanel2);
 							revalidate();
 							repaint();
-							p++;
 						}
 
 						line = br.readLine();
+						p++;
 
 					}
 
@@ -211,6 +253,7 @@ public class MainPage extends JFrame {
 		txtSearch.setColumns(10);
 
 		JLabel lblSearch = new JLabel("Search:");
+		
 		lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblSearch.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSearch.setBounds(315, 18, 69, 46);
