@@ -43,7 +43,7 @@ public class BPlusTrees {
 		try {
 			FileWriter fw = new FileWriter(fmedicine, true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			bw.write(str);
+			bw.write(key+"|"+str);
 			bw.close();
 			fw.close();
 		} catch (Exception e) {

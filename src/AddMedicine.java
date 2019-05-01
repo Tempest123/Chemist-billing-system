@@ -166,7 +166,7 @@ public class AddMedicine extends JFrame {
 					
 				
 				if(proceed) {
-					String str = id+"|"+name+"|"+qty+"|"+expdate+"|"+manucomp+System.lineSeparator();
+					String str = name+"|"+qty+"|"+expdate+"|"+manucomp+System.lineSeparator();
 					BPlusTrees obj = new BPlusTrees();
 					if(!obj.found(id)) {
 						obj.insert(str, id);
