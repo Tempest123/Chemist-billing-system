@@ -187,7 +187,8 @@ public class RegisterForm extends JFrame {
 							stringcontents = line.split("\\|");
 							for (p=0;p<stringcontents.length-1;p+=3) {
 								if(stringcontents[p].equals(username)) {
-									JOptionPane.showMessageDialog(null, "User already exists!");								
+									JOptionPane.showMessageDialog(null, "User already exists!");	
+									proceed = false;
 									break;
 								}					
 							}
@@ -199,7 +200,7 @@ public class RegisterForm extends JFrame {
 						
 						if(p>=stringcontents.length-1)
 							flag=false;
-						if(!flag) {
+						if(proceed && !flag) {
 							JOptionPane.showMessageDialog(null, "Registration Completed!");
 							String str = username+"|"+password+"|"+email+System.lineSeparator();
 							try {

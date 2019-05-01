@@ -103,7 +103,7 @@ public class MainPage extends JFrame {
 		lblClickHereTo.setBounds(21, 11, 261, 188);
 		panel.add(lblClickHereTo);
 		
-		File fuser = new File("usercred.txt");
+		File fmedicines = new File("medicines.txt");
 			
 		txtSearch = new JTextField();
 
@@ -135,7 +135,7 @@ public class MainPage extends JFrame {
 		    	String username = txtSearch.getText().toString();
 				boolean flag = false;
 				try {
-					FileReader fr = new FileReader(fuser);
+					FileReader fr = new FileReader(fmedicines);
 					BufferedReader br = new BufferedReader(fr);
 					String line = br.readLine();
 					int p=0;

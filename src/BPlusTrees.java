@@ -50,22 +50,10 @@ public class BPlusTrees {
 		}
 
 		b.insert(key, str);
+	}
+	
+	public void show() {
 		b.display();
-
-//				case 2:	System.out.println("Enter the integer to be found: ");
-//					key = sc.nextInt();
-//					flag=b.search(key);
-//					if(flag)
-//						System.out.println("Element is present\n");
-//					else
-//						System.out.println("Element not found\n");
-//					break;
-//				case 3: b.display();
-//					break;
-//				default:System.exit(0);
-//			
-//		}
-
 	}
 
 	public void search(int key) {

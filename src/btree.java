@@ -204,11 +204,6 @@ public class btree {
 		Node queue[] = new Node[50];
 		int f = 0, r = -1, lvl = -1, i;
 		try {
-			File fmedicine = new File("fmedicine.txt");
-			FileWriter fw;
-			BufferedWriter br;
-			fw = new FileWriter(fmedicine);
-			br = new BufferedWriter(fw);
 			queue[++r] = null;
 			queue[++r] = root;
 //			for (int k = 0; k < MAX; k++)
@@ -241,8 +236,6 @@ public class btree {
 					f++;
 				}
 			}
-			br.close();
-			fw.close();
 		} catch (Exception e) {
 			System.out.println("File reader error" + e);
 		}
