@@ -32,6 +32,8 @@ public class BPlusTrees {
 					line = br.readLine();
 					//System.out.println("rest: " +rest);
 				}
+				br.close();//added now
+				fr.close();//added now
 			} catch (Exception e) {
 				System.out.println("Failed to read to file");
 			}

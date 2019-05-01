@@ -57,8 +57,9 @@ public class Inventory extends JFrame {
 		contentPane.setLayout(null);
 		
 		BPlusTrees obj = new BPlusTrees();
-		obj.show();//needed!
 		System.out.println("---------------------------------"+obj.records.length+"---------------------------");
+		obj.show();//needed!
+		
 		records = new String[obj.records.length];
 		for(int i = 0;i < obj.records.length;i++) {
 			records[i] = obj.records[i];

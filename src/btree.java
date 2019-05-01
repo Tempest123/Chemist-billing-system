@@ -16,9 +16,6 @@ public class btree {
 	btree() {
 		root = create_newnode();
 
-		// fr = new FileReader("fmedicine");
-		// BufferedReader br = new BufferedReader(fr);
-
 	}
 
 	void insert(int key, String str) {
@@ -210,6 +207,7 @@ public class btree {
 //			for (int k = 0; k < MAX; k++)
 //				for (int l = 0; l < MAX && queue[k]!= null; l++)
 //					System.out.print(queue[k].ele[l] + "\t");
+			allrecords="";//added now
 			while (f < r) {
 				if (queue[f] == null) {
 					System.out.println("\n\nLevel --> " + (++lvl));

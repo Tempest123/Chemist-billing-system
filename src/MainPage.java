@@ -103,11 +103,10 @@ public class MainPage extends JFrame {
 		lblClickHereTo.setBounds(21, 11, 261, 188);
 		panel.add(lblClickHereTo);
 		File f = new File("medicines.txt");
-		
-		Inventory inv = new Inventory();
 		JButton btnsearchusingid = new JButton("Check Inventory");
 		btnsearchusingid.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Inventory inv = new Inventory();
 				inv.setVisible(true);
 			}
 		});
