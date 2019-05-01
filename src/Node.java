@@ -5,4 +5,5 @@ public class Node {
 	Node child[] = new Node[MAX];		
 	Node parent;
 	Node next_child;
+	String details[] = new String[MAX];
 };

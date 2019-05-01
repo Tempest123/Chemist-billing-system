@@ -159,25 +159,17 @@ public class AddMedicine extends JFrame {
 					proceed = false;
 				}
 				
-				if(manucomp.isEmpty() || name.isEmpty())
+				if(manucomp.isEmpty() || name.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "One or more fields are empty!");
 					proceed = false;
+				}
+					
 				
 				if(proceed) {
 					String str = id+"|"+name+"|"+qty+"|"+expdate+"|"+manucomp+System.lineSeparator();
-					File fmedicines = new File("medicines.txt");
-//					try {
-//						FileWriter fw = new FileWriter(fmedicines, true);
-//						BufferedWriter bw = new BufferedWriter(fw);
-//						bw.write(str);
-//						JOptionPane.showMessageDialog(null, "Medicine details added!");
-//						jframe.dispose();
-//						bw.close();
-//						fw.close();
-//					} catch (Exception e) {
-//						System.out.println("Failed to write to file");
-//					}
-					
-					
+					BPlusTrees obj = new BPlusTrees();
+					obj.insert(str, id);
+					JOptionPane.showMessageDialog(null, "Insertion Completed!");		
 				}								
 			}
 		});
