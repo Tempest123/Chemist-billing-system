@@ -20,7 +20,7 @@ public class Inventory extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	static BPlusTrees obj = new BPlusTrees();
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,14 +39,15 @@ public class Inventory extends JFrame {
 	 * Create the frame.
 	 */
 	public Inventory() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 434, 491);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		BPlusTrees obj = new BPlusTrees();
 		obj.show();//needed!
 		records = new String[obj.records.length];
 		for(int i = 0;i < obj.records.length;i++) {
@@ -66,7 +67,6 @@ public class Inventory extends JFrame {
 			}
 		}
 		JTable myTable = new JTable(data,columnNames);
-		myTable.setFillsViewportHeight(true);
 		JScrollPane scrollPane = new JScrollPane(myTable);
 		scrollPane.setBounds(10, 11, 398, 430);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
