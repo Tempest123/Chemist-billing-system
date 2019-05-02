@@ -195,7 +195,7 @@ public class MainPage extends JFrame {
 		scrollPane.setViewportView(viewPanel);
 		contentPane.add(scrollPane);
 		viewPanel.setBackground(SystemColor.activeCaption);
-		viewPanel.setLayout(new GridLayout(10, 0));
+		viewPanel.setLayout(new GridLayout(200, 6));
 		
 		try {
 			int len = 0;
