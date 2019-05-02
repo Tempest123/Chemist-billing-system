@@ -143,23 +143,29 @@ public class MainPage extends JFrame {
 
 			}
 
+			@SuppressWarnings("null")
 			public void changedSearch() {
 
 				String username = txtSearch.getText().toString();
 				boolean flag = false;
 				try {
 					int len=0;
+					int[] qty = null;
 					FileReader freader = new FileReader(fmedicines);
 					BufferedReader breader = new BufferedReader(freader);
 					String linereader = breader.readLine();
-					while(breader.readLine()!=null)
-						len++;
-					len++;
+					String[] slr;
+					int k = 0;
+					while(linereader!=null) {
+						slr = linereader.split("\\|");
+						qty[k] = Integer.parseInt(slr[0]);
+						qty[k+1] = Integer.parseInt(slr[2]);
+					}
+					
 
 					breader.close();
 					freader.close();
-					int[] qty = new int[len];
-					System.out.println("Length="+len);
+					System.out.println("Length="+qty.length);
 				} catch(Exception e) {
 					System.out.println("Couldn't calculate length");
 				}

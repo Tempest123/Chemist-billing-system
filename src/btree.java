@@ -217,14 +217,16 @@ public class btree {
 					if (queue[r] != null)
 						queue[++r] = null;
 					f++;
+					allrecords = "";
 				} else {
+					
 					for (i = 0; i < MAX; i++) {
 						if (queue[f].ele[i] != -1) {
 							System.out.print(queue[f].ele[i] + ":");
 								String[] line = queue[f].details[i].split(System.lineSeparator());
 							System.out.print(line[line.length-1]);
 							allrecords = allrecords + queue[f].ele[i] + "|" + line[line.length-1] + System.lineSeparator();
-							System.out.println(allrecords);
+							System.out.println("all records: " + allrecords);
 							System.out.print("\t");
 							
 
