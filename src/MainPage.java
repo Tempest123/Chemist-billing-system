@@ -49,6 +49,8 @@ public class MainPage extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtSearch;
 	static boolean changed = false;
+	static int[] q;
+
 	/**
 	 * Launch the application.
 	 */
@@ -119,6 +121,19 @@ public class MainPage extends JFrame {
 		btnsearchusingid.setBackground(Color.DARK_GRAY);
 		btnsearchusingid.setBounds(21, 231, 261, 36);
 		panel.add(btnsearchusingid);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBackground(Color.GRAY);
+		lblNewLabel_1.setIcon(new ImageIcon(MainPage.class.getResource("/ApplicationImages/rupee.png")));
+		lblNewLabel_1.setBounds(21, 368, 65, 124);
+		panel.add(lblNewLabel_1);
+		
+		JLabel label = new JLabel("");
+		label.setFont(new Font("Tahoma", Font.PLAIN, 60));
+		label.setOpaque(true);
+		label.setBackground(Color.GRAY);
+		label.setBounds(96, 390, 186, 77);
+		panel.add(label);
 
 		File fmedicines = new File("medicines.txt");
 
@@ -131,9 +146,45 @@ public class MainPage extends JFrame {
 		scrollPane.setViewportView(viewPanel);
 		contentPane.add(scrollPane);
 		viewPanel.setBackground(SystemColor.activeCaption);
-		viewPanel.setLayout(new GridLayout(10,0));
+		viewPanel.setLayout(new GridLayout(10, 0));
 		
-		
+		try {
+			int len = 0;
+			System.out.println("-----Initialize-----");
+			FileReader freader = new FileReader(fmedicines);
+			BufferedReader breader = new BufferedReader(freader);
+			String linereader = breader.readLine();
+			String[] slr;
+			while (breader.readLine() != null) {
+				len++;
+			}
+			len++;
+			System.out.println(len);
+			breader.close();
+			freader.close();
+
+			q = new int[len * 3];
+			slr = linereader.split("\\|");
+
+			FileReader filer = new FileReader(fmedicines);
+			BufferedReader bufr = new BufferedReader(filer);
+			String lr = bufr.readLine();
+			int k = 0;
+			while (lr != null) {
+				q[k] = Integer.parseInt(lr.split("\\|")[0]);
+				q[k+2] = Integer.parseInt(lr.split("\\|")[4]);
+				System.out.println("Value in q: " + q[k]);
+				k += 3;
+				lr = bufr.readLine();
+			}
+			System.out.println(q.length);
+			breader.close();
+			freader.close();
+
+			// System.out.println("Length="+qty.length);
+		} catch (Exception e) {
+			System.out.println("Couldn't calculate length");
+		}
 
 		txtSearch.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -148,91 +199,179 @@ public class MainPage extends JFrame {
 
 				String username = txtSearch.getText().toString();
 				boolean flag = false;
-				try {
-					int len=0;
-					int[] qty = null;
-					FileReader freader = new FileReader(fmedicines);
-					BufferedReader breader = new BufferedReader(freader);
-					String linereader = breader.readLine();
-					String[] slr;
-					int k = 0;
-					while(linereader!=null) {
-						slr = linereader.split("\\|");
-						qty[k] = Integer.parseInt(slr[0]);
-						qty[k+1] = Integer.parseInt(slr[2]);
-					}
-					
-
-					breader.close();
-					freader.close();
-					System.out.println("Length="+qty.length);
-				} catch(Exception e) {
-					System.out.println("Couldn't calculate length");
-				}
+				
 				try {
 					FileReader fr = new FileReader(fmedicines);
 					BufferedReader br = new BufferedReader(fr);
 					String line = br.readLine();
-					int p = 0;
+					int p = -1;
 					String[] stringcontents = {};
 					viewPanel.removeAll();
 					while (line != null) {
-
+						p++;
 						stringcontents = line.split("\\|");
 						JPanel viewPanel2 = new JPanel();
 						if (Pattern.matches(username + ".*", stringcontents[1])) {
 							JLabel lblitem = new JLabel();
-							
+
 							lblitem.setOpaque(true);
-							//lblitem.setBackground(Color.DARK_GRAY);
+							// lblitem.setBackground(Color.DARK_GRAY);
 							lblitem.setForeground(Color.BLACK);
 							lblitem.setHorizontalAlignment(SwingConstants.LEFT);
 							lblitem.setFont(new Font("Tahoma", Font.PLAIN, 16));
-							lblitem.setText(stringcontents[1]);//modified							
+							lblitem.setText(stringcontents[1]);// modified
 							JLabel lblitem11 = new JLabel();
 							lblitem11.setOpaque(true);
-							//lblitem11.setBackground(Color.DARK_GRAY);
+							// lblitem11.setBackground(Color.DARK_GRAY);
 							lblitem11.setForeground(Color.BLACK);
 							lblitem11.setHorizontalAlignment(SwingConstants.LEFT);
 							lblitem11.setFont(new Font("Tahoma", Font.PLAIN, 16));
-							lblitem11.setText(stringcontents[3]);//modified
+							lblitem11.setText(stringcontents[3]); 
 							JLabel lblitem12 = new JLabel();
 							lblitem12.setOpaque(true);
-							//lblitem12.setBackground(Color.DARK_GRAY);
+							// lblitem12.setBackground(Color.DARK_GRAY);
 							lblitem12.setForeground(Color.BLACK);
 							lblitem12.setHorizontalAlignment(SwingConstants.LEFT);
 							lblitem12.setFont(new Font("Tahoma", Font.PLAIN, 16));
-							lblitem12.setText(stringcontents[2]);//modified						
+							lblitem12.setText(stringcontents[2]);
 							viewPanel2.add(lblitem);
-							viewPanel2.add(Box.createRigidArea(new Dimension(150-(stringcontents[1].length()*9), 10)));
+							viewPanel2.add(Box.createRigidArea(new Dimension(150 - (stringcontents[1].length() * 9), 10)));
 							viewPanel2.add(lblitem11);
 							viewPanel2.add(Box.createRigidArea(new Dimension(20, 0)));
 							viewPanel2.add(lblitem12);
 							viewPanel2.add(Box.createRigidArea(new Dimension(20, 0)));
-							
+
+							int quantity = Integer.parseInt(stringcontents[2]);
 							JButton item2 = new JButton("-");
 							item2.setFont(new Font("Tahoma", Font.PLAIN, 12));
-							//item2.setPreferredSize(new Dimension(25, 25));
+							// item2.setPreferredSize(new Dimension(25, 25));
+							final String cont = stringcontents[0];
+
 							viewPanel2.add(item2);
 							viewPanel2.add(Box.createRigidArea(new Dimension(10, 0)));
-							JTextField item3 = new JTextField(stringcontents[2]);
+							int id = Integer.parseInt(stringcontents[0]);
+							
+							
+							JLabel item3 = new JLabel();
+							
+							for (int l = 0; l < q.length; l += 3) {
+								if (q[l] == id) {
+									item3.setText(q[l+1]+"");
+								}								
+							}
+							
+							
+							
+							repaint();
 							viewPanel2.add(item3);
+							
+							
+							
+							item2.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+
+									
+
+									int vallbl12 = Integer.parseInt(lblitem12.getText().toString());
+									if (vallbl12 < quantity) {
+										vallbl12++;
+
+									}
+
+									int vallblitem3 = Integer.parseInt(item3.getText().toString());
+									if (vallblitem3 > 0) {
+										vallblitem3--;
+										for (int l = 0; l < q.length; l += 3) {
+
+											if (q[l] == id) {
+												q[l + 1]--;
+											}
+											for (int i = 0; i < q.length; i+=3)
+												System.out.println("Queue[" + (i+1) + "]:" + q[i+1]);
+										}
+
+									}
+									lblitem12.setText(vallbl12 + "");
+									item3.setText(vallblitem3 + "");
+									
+									calcSum();
+								}
+
+								private void calcSum() {
+					
+									int sum = 0;
+									for(int j =0; j<q.length;j+=3) {
+										sum = sum + q[j+1]*q[j+2];
+										System.out.println(sum);
+									}
+									
+									label.setText(sum+"");
+									repaint();
+									
+								}
+							});
+
 							JButton item4 = new JButton("+");
 							item4.setFont(new Font("Tahoma", Font.PLAIN, 12));
-							//item4.setPreferredSize(new Dimension(25, 25));
+							// item4.setPreferredSize(new Dimension(25, 25));
+
+							item4.addMouseListener(new MouseAdapter() {
+								@Override
+								public void mouseClicked(MouseEvent arg0) {
+
+									
+
+									int vallbl12 = Integer.parseInt(lblitem12.getText().toString());
+									if (vallbl12 > 0) {
+										vallbl12--;
+									}
+
+									int vallblitem3 = Integer.parseInt(item3.getText().toString());
+									if (vallblitem3 < quantity) {
+										vallblitem3++;
+										
+										for (int l = 0; l < q.length; l += 3) {
+											if (q[l] == id) {
+												q[l + 1]++;
+											}
+										}
+										for (int i = 0; i < q.length; i+=3)
+											System.out.println("Queue[" + i + "]:" + q[i+1]);
+									}
+
+									lblitem12.setText(vallbl12 + "");
+									item3.setText(vallblitem3 + "");
+									revalidate();
+									repaint();
+									
+									calcSum();
+								}
+
+								private void calcSum() {
+									
+									int sum = 0;
+									for(int j =0; j<q.length;j+=3) {
+										sum = sum + q[j+1]*q[j+2];
+										System.out.println(sum);
+									}
+									
+									label.setText(sum+"");
+									repaint();
+									
+								}
+							});
 							viewPanel2.add(Box.createRigidArea(new Dimension(10, 0)));
 							viewPanel2.add(item4);
 
 							revalidate();
-							repaint();	
+							repaint();
 							viewPanel.add(viewPanel2);
 							revalidate();
 							repaint();
 						}
 
 						line = br.readLine();
-						p++;
-
 					}
 
 					br.close();
@@ -259,7 +398,7 @@ public class MainPage extends JFrame {
 		txtSearch.setColumns(10);
 
 		JLabel lblSearch = new JLabel("Search:");
-		
+
 		lblSearch.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblSearch.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSearch.setBounds(315, 18, 69, 46);
