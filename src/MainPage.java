@@ -50,7 +50,7 @@ public class MainPage extends JFrame {
 	private JTextField txtSearch;
 	static boolean changed = false;
 	static int[] q;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -71,6 +71,7 @@ public class MainPage extends JFrame {
 	 * Create the frame.
 	 */
 	public MainPage() {
+
 		this.setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 50, 900, 600);
@@ -85,7 +86,7 @@ public class MainPage extends JFrame {
 		panel.setBounds(0, 0, 305, 561);
 		contentPane.add(panel);
 		panel.setLayout(null);
-
+		JFrame fr = this;
 		JLabel lblClickHereTo = new JLabel(new ImageIcon("src/ApplicationImages/greencross.png"));
 		lblClickHereTo.setForeground(new Color(0, 0, 0));
 		lblClickHereTo.addMouseListener(new MouseAdapter() {
@@ -94,6 +95,7 @@ public class MainPage extends JFrame {
 				AddMedicine obj = new AddMedicine();
 				obj.setVisible(true);
 				obj.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+				fr.dispose();
 			}
 		});
 
@@ -125,15 +127,63 @@ public class MainPage extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1.setBackground(Color.GRAY);
 		lblNewLabel_1.setIcon(new ImageIcon(MainPage.class.getResource("/ApplicationImages/rupee.png")));
-		lblNewLabel_1.setBounds(21, 368, 65, 124);
+		lblNewLabel_1.setBounds(21, 347, 65, 124);
 		panel.add(lblNewLabel_1);
 		
 		JLabel label = new JLabel("");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 60));
 		label.setOpaque(true);
 		label.setBackground(Color.GRAY);
-		label.setBounds(96, 390, 186, 77);
+		label.setBounds(96, 369, 186, 77);
 		panel.add(label);
+		JButton btnbill = new JButton("Pay");
+		btnbill.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+//				for(int k = 1;k < q.length;k+=3) {
+//					if(q[k] == 0) {
+//						q[k-1] = 0;
+//						q[k+1] = 0;				
+//					}
+//				}
+//				int l = 0;
+//				for(int k = 0;k < q.length;k++) {
+//					if(q[k] == 0) 
+//						continue;
+//					l++;					
+//				}
+//				int s[] = new int[l];
+//				int counter=0;
+//				for(int k = 0;k < q.length;k++) {
+//					if(q[k] == 0) 
+//						continue;
+//					s[counter++] = q[k];					
+//				}
+				
+				
+				Payment obj = new Payment(q);
+				obj.setVisible(true);
+				obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				
+					
+			}
+		});
+		
+		btnbill.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+//				int input = JOptionPane.showConfirmDialog(null, "Confirm Payment?");
+//				if(input == 0) {				
+				
+				
+				//}
+			}
+		});
+		btnbill.setForeground(Color.WHITE);
+		btnbill.setBackground(new Color(255, 0, 0));
+		btnbill.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		btnbill.setBounds(21, 482, 261, 53);
+		panel.add(btnbill);
 
 		File fmedicines = new File("medicines.txt");
 

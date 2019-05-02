@@ -50,6 +50,8 @@ public class AddMedicine extends JFrame {
 	 * Create the frame.
 	 */
 	public AddMedicine() {
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 416, 514);
 		contentPane = new JPanel();
@@ -102,7 +104,7 @@ public class AddMedicine extends JFrame {
 		tfExpiryDate.setBounds(214, 271, 158, 28);
 		contentPane.add(tfExpiryDate);
 		
-		JLabel lblManufacturingCompany = new JLabel("Manufacturing Company");
+		JLabel lblManufacturingCompany = new JLabel("Price");
 		lblManufacturingCompany.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblManufacturingCompany.setBounds(44, 325, 158, 28);
 		contentPane.add(lblManufacturingCompany);
@@ -170,7 +172,11 @@ public class AddMedicine extends JFrame {
 					BPlusTrees obj = new BPlusTrees();
 					if(!obj.found(id)) {
 						obj.insert(str, id);
-						JOptionPane.showMessageDialog(null, "Insertion Completed!");						
+						
+						JOptionPane.showMessageDialog(null, "Insertion Completed!");
+						MainPage mainp = new MainPage();
+						mainp.setVisible(true);
+						mainp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					}
 					else		
 						JOptionPane.showMessageDialog(null, "Duplicate Record! Not inserted!");
@@ -178,6 +184,16 @@ public class AddMedicine extends JFrame {
 				}								
 			}
 		});
+		
+		jframe.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		    	MainPage mainp = new MainPage();
+				mainp.setVisible(true);
+				mainp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    }
+		});
+		
 		btnAddRecord.setBackground(new Color(255, 0, 0));
 		btnAddRecord.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnAddRecord.setBounds(44, 403, 333, 36);
