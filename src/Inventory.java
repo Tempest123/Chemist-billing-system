@@ -67,7 +67,7 @@ public class Inventory extends JFrame {
 		}
 		int numberoffields = 5;
 		String words[] = new String[numberoffields];
-		String[] columnNames = {"ID","Medicine Name","Stock","Date","Company"};
+		String[] columnNames = {"ID","Medicine Name","Stock","Date","Price"};
 		Object[][] data = new String[records.length][numberoffields];
 		
 		for(int k = 0; k < records.length;k++) {

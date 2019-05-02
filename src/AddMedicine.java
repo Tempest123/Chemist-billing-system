@@ -174,6 +174,7 @@ public class AddMedicine extends JFrame {
 						obj.insert(str, id);
 						
 						JOptionPane.showMessageDialog(null, "Insertion Completed!");
+						jframe.dispose();
 						MainPage mainp = new MainPage();
 						mainp.setVisible(true);
 						mainp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

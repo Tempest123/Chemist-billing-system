@@ -20,6 +20,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Payment extends JFrame {
 	static int q[];
@@ -106,15 +108,7 @@ public class Payment extends JFrame {
 			row++;
 			 			
 		}
-		
-//		row=0;
-//		for(int i = 0; i < q.length;i+=3) {
-//			int a = Integer.parseInt((String)data[row][1]);
-//			int b = Integer.parseInt((String)data[row][2]);
-//			data[row][3] = a*b;
-//			row++;
-//		}
-			
+				
 
 		
 		DefaultTableModel model = new DefaultTableModel(data,columnNames);
@@ -130,35 +124,36 @@ public class Payment extends JFrame {
         File fmedicines = new File("medicines.txt");
 
         
-//        try {
-//        FileReader filer = new FileReader(fmedicines);
-//		BufferedReader bufr = new BufferedReader(filer);
-//		String lr = bufr.readLine();
-//		String cont[] = new String[5];
-//		int k = 0;
-//		while (lr != null) {
-//			cont[k] = lr.split("\\|")[0];
-//			
-//			lr = bufr.readLine();
-//		}
-//		System.out.println(q.length);
-//		bufr.close();
-//		
-//			filer.close();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			System.out.println("Reading failed");
-//		}
+
         
         
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setVisible(true);
-		scrollPane.setBounds(10, 11, 381, 357);
+		scrollPane.setBounds(10, 61, 381, 307);
 		contentPane.add(scrollPane);
 
 		btnNewButton = new JButton("Confirm");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Payment Successful!");	
+		        try {
+		        FileReader f = new FileReader(fmedicines);
+				BufferedReader b = new BufferedReader(f);
+				String l = b.readLine();
+				String cont[][] = new String[(int) Math.ceil(q.length/3)][5];
+				int r = 0;
+				while (l != null) {
+					cont[r++] = l.split("\\|");				
+					System.out.println(cont[r]);
+					l = b.readLine();
+				}
+				
+				b.close();				
+				f.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Reading failed");
+				}
 				
 				
 			}
@@ -168,6 +163,11 @@ public class Payment extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton.setBounds(10, 379, 381, 58);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel("Bill:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		lblNewLabel.setBounds(10, 11, 381, 37);
+		contentPane.add(lblNewLabel);
 		
 
 	}

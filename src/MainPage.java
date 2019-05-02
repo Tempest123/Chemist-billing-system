@@ -191,7 +191,6 @@ public class MainPage extends JFrame {
 
 		JPanel viewPanel = new JPanel();
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(394, 89, 464, 461);
 		scrollPane.setViewportView(viewPanel);
 		contentPane.add(scrollPane);
