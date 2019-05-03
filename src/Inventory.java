@@ -83,6 +83,19 @@ public class Inventory extends JFrame {
 		scrollPane.setBounds(10, 11, 398, 430);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		contentPane.add(scrollPane);
+		
+		
+		JFrame jf = new JFrame();
+		
+		jf.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        MainPage mp = new MainPage();
+		        mp.setVisible(true);
+		        mp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        jf.dispose();
+		    }
+		});
 
 		
 	}

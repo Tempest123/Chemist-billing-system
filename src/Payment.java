@@ -124,8 +124,18 @@ public class Payment extends JFrame {
 		scrollPane.setVisible(true);
 		scrollPane.setBounds(10, 61, 381, 307);
 		contentPane.add(scrollPane);
-
 		JFrame jframe = this;
+		jframe.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        MainPage mp = new MainPage();
+		        mp.setVisible(true);
+		        mp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		        jframe.dispose();
+		    }
+		});
+		
+		
 		btnNewButton = new JButton("Confirm");
 		btnNewButton.addActionListener(new ActionListener() {
 			File fmedicines = new File("medicines.txt");
@@ -170,10 +180,8 @@ public class Payment extends JFrame {
 					System.out.println("Failed to read from file");
 				}
 				JOptionPane.showMessageDialog(null, "Payment successful!");
-				MainPage mp = new MainPage();
-				mp.setVisible(true);
-				mp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				jframe.dispose();
+				
+				System.exit(0);
 				
 					
 				
