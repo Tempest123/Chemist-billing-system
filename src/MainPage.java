@@ -139,30 +139,13 @@ public class MainPage extends JFrame {
 		JButton btnbill = new JButton("Pay");
 		btnbill.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				for(int k = 1;k < q.length;k+=3) {
-//					if(q[k] == 0) {
-//						q[k-1] = 0;
-//						q[k+1] = 0;				
-//					}
-//				}
-//				int l = 0;
-//				for(int k = 0;k < q.length;k++) {
-//					if(q[k] == 0) 
-//						continue;
-//					l++;					
-//				}
-//				int s[] = new int[l];
-//				int counter=0;
-//				for(int k = 0;k < q.length;k++) {
-//					if(q[k] == 0) 
-//						continue;
-//					s[counter++] = q[k];					
-//				}
+
 				
 				
 				Payment obj = new Payment(q);
 				obj.setVisible(true);
 				obj.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				fr.dispose();
 				
 					
 			}
